@@ -76,6 +76,7 @@ public class UserEntity {
 	
 	@PrePersist
 	public void prePersist() {
+		
 		creation_date = new Date();
 		last_update = new Date();
 		last_login = new Date();

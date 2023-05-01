@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.bci.api.dto.ApiResponseErrorDto;
 
@@ -65,6 +66,19 @@ public class RestControllerExceptionHandler {
 						);
 
 	}
+	
+	
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ResponseEntity<ApiResponseErrorDto> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException exception){
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(
+						createApiResponseErrorDto("UUID no corresponde", Arrays.asList(exception.getMessage()))
+						);
+
+	}
+	
+		
 	
 	private ApiResponseErrorDto createApiResponseErrorDto(String message,List<String> errors) {
 		return ApiResponseErrorDto.builder()				
