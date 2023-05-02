@@ -1,5 +1,6 @@
 package com.bci.api.dto;
 
+import java.util.Date;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -17,11 +18,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserResponseAllDto {
 
-	private UUID user_id;
+	private UUID userId;
 	private String name;
 	private String email;
-	private String creation_date;
-	private String last_update;
-	private String last_login;	
-	private String is_active;
+	private Date creationDate;
+	private Date lastUpdate;
+	private Date lastLogin;	
+	private Integer isActive;
 }

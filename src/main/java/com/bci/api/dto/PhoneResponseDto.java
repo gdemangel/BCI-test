@@ -16,12 +16,12 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponseDto {
-
+public class PhoneResponseDto {
+	
+	private Integer number; 
+	private Integer cityCode;
+	private Integer countryCode;
 	private UUID userId;
 	private Date creationDate;
-	private Date lastUpdate;
-	private Date lastLogin;	
-	private Integer isActive;
-	private UUID accesToken;
+
 }

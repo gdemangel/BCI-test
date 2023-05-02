@@ -3,59 +3,64 @@ package com.bci.api.entity;
 import java.util.Date;
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.boot.autoconfigure.web.WebProperties.Resources.Chain.Strategy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.annotation.Generated;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "phone")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-@Table(name="phone")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PhoneEntity {
 	
 	@Id
-	@Column(name = "phone_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long phone_id;
+	@Column(name = "phoneId")
+	private Long phoneId;
 	
 	@Column(name= "number", nullable = false)
 	@NotNull(message = "campo obligatorio")
 	private Integer number;
 	
-	@Column(name= "city_code", nullable = false)
+	@Column(name= "cityCode", nullable = false)
 	@NotNull(message = "campo obligatorio")
-	private Integer city_code;
+	private Integer cityCode;
 	
-	@Column(name= "country_code", nullable = false)
+	@Column(name= "countryCode", nullable = false)
 	@NotNull(message = "campo obligatorio")
-	private Integer country_code;
+	private Integer countryCode;
 	
 	@Column(name= "creation_date")
 	@Temporal(TemporalType.DATE)
-	private Date creation_date;
+	private Date creationDate;
 	
-	@Column(name = "user_id", columnDefinition = "VARCHAR(36)")
-	private UUID user_id;
+	@Column(name = "userId", columnDefinition = "VARCHAR(36)")
+	private UUID userId;
 	
 	@PrePersist
 	public void prePersist() {
-		creation_date = new Date();		
+		creationDate = new Date();
 	}
 	
 }

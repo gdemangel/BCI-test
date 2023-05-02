@@ -23,64 +23,63 @@ import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "usuario")
 @EntityListeners(AuditingEntityListener.class)
 
-@Getter
-@Setter
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity {
+public class UserEntity {	
 	
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
-	private UUID user_id;
-	
-	@Column (name="name")
+	private UUID userId;
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="email", unique = true)
+
+	@Column(name = "email", unique = true)
 	private String email;
-	
-	@Column (name="password")
+
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name= "creation_date")
+
+	@Column(name = "creationDate")
 	@Temporal(TemporalType.DATE)
-	private Date creation_date;
-	
-	@Column(name= "last_update")
+	private Date creationDate;
+
+	@Column(name = "lastUpdate")
 	@Temporal(TemporalType.DATE)
-	private Date last_update;
-	
-	@Column(name= "last_login")
+	private Date lastUpdate;
+
+	@Column(name = "lastLogin")
 	@Temporal(TemporalType.DATE)
-	private Date last_login;
-	
-	@Column (name="is_active")
-	private Integer is_active;
-	
+	private Date lastLogin;
+
+	@Column(name = "isActive")
+	private Integer isActive;
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
-	private List<PhoneEntity> phone = new ArrayList<>();
+	@JoinColumn(name = "userId", referencedColumnName = "userId")
+	private List<PhoneEntity> phone = new ArrayList<>();	
 	
-	
-	
+	@Column(name = "acces_token")
+	private UUID accesToken;
+
 	@PrePersist
 	public void prePersist() {
+
+		accesToken = UUID.randomUUID();
+		creationDate = new Date();
+		lastUpdate = new Date();
+		lastLogin = new Date();
+		isActive = 0;
 		
-		creation_date = new Date();
-		last_update = new Date();
-		last_login = new Date();
-		is_active = 0;
-	}
+	}	
 
 }

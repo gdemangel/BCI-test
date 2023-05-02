@@ -1,0 +1,29 @@
+CREATE SCHEMA `bci_api` ;
+
+CREATE TABLE `bci_api`.`usuario` (
+  `userId` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `creationDate` DATE NULL,
+  `lastUpdate` DATE NULL,
+  `lastLogin` DATE NULL,
+  `isActive` INT NULL,
+  `accesToken` VARCHAR(36) NULL,
+  PRIMARY KEY (`userId`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
+
+CREATE TABLE `bci_api`.`phone` (
+  `phoneId` BIGINT NOT NULL,
+  `number` INT NOT NULL,
+  `cityCode` INT NOT NULL,
+  `countryCode` INT NOT NULL,
+  `creationDate` DATE NULL,
+  `userId` VARCHAR(36) NULL,
+  PRIMARY KEY (`phoneId`),
+  INDEX `userId_idx` (`userId` ASC) VISIBLE,
+  CONSTRAINT `userId`
+    FOREIGN KEY (`userId`)
+    REFERENCES `bci_api`.`usuario` (`userId`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);

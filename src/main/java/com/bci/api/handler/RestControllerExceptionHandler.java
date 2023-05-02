@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import com.bci.api.dto.ApiResponseErrorDto;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 
 
@@ -29,10 +31,20 @@ public class RestControllerExceptionHandler {
 	public ResponseEntity<ApiResponseErrorDto> methodArgumentNotValidException(MethodArgumentNotValidException exception){
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 				.body(
-						createApiResponseErrorDto("Erro de validaciones en request", exception.getBindingResult().getFieldErrors().stream()
+						createApiResponseErrorDto("Error de validaciones en request", exception.getBindingResult().getFieldErrors().stream()
 								.map( error -> error.getField()+" "+error.getDefaultMessage())
 								.collect(Collectors.toList()))
 						);
+	}
+	
+	@ExceptionHandler(EntityNotFoundException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public ResponseEntity<ApiResponseErrorDto> entityNotFoundException(EntityNotFoundException exception){
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body(
+						createApiResponseErrorDto("No encontrado" ,Arrays.asList(exception.getMessage()))
+						);
+
 	}
 	
 		
@@ -77,6 +89,19 @@ public class RestControllerExceptionHandler {
 						);
 
 	}
+	
+	
+	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+	@ResponseStatus(HttpStatus.PRECONDITION_FAILED)
+	public ResponseEntity<ApiResponseErrorDto> httpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException exception){
+		return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED)
+				.body(
+						createApiResponseErrorDto("Error en json de entrada", Arrays.asList(exception.getMessage()))
+						);
+
+	}
+	
+	
 	
 		
 	

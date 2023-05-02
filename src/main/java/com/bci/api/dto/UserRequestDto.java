@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bci.api.entity.PhoneEntity;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -23,7 +22,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserRequestDto {
 	
-	
 	@NotBlank(message = "campo obligatorio")
 	private String name;
 	
@@ -35,7 +33,6 @@ public class UserRequestDto {
 	@Pattern(regexp = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{6,10}$", message = "La clave debe ser de 6 a 10 caracteres, debe incluir mayuscula, minuscula, numeros y caracteres especiales, sin espacios" )
 	private String password;
 	
-	@NotEmpty(message = "campo obligatorio")
 	private List<PhoneEntity> phone = new ArrayList<>();
 
 }

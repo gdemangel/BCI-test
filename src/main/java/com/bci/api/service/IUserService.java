@@ -1,21 +1,27 @@
 package com.bci.api.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import com.bci.api.dto.UserRequestDto;
 import com.bci.api.dto.UserResponseAllDto;
 import com.bci.api.dto.UserResponseDto;
+import com.bci.api.entity.UserEntity;
 
 public interface IUserService {
 
-	public UserResponseDto save(UserRequestDto user);
+	UserResponseDto save(UserRequestDto user);
 
-	public List<UserResponseAllDto> findAll();
+	List<UserResponseAllDto> findAll();
 
-	public void deleteById(UUID id);
+	void deleteById(UUID id);
 
-	public Optional<UserResponseAllDto> findById(UUID uuid);
+	UserResponseAllDto findById(UUID uuid);
+	
+	UserEntity findByIdUpdate(UUID uuid);
+	
+	UserResponseDto update(UserRequestDto userRequestDto , UUID uuid);
+
+
 
 }

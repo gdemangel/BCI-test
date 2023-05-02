@@ -2,11 +2,13 @@ spring:
   datasource:
     url: jdbc:h2:mem:bci_db
     driverClassName: org.h2.Driver
-    username: sa
-    password: 
+    username: bci_usuarioAdmin
+    password: bci_usuarioAdmin2023
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: true    
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true    
   h2:
     console:
       enabled: true
