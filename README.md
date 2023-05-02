@@ -1,4 +1,4 @@
-BCI test Users management
+**BCI test Users management**
 
 
 Api para el manejo de usuarios
@@ -18,13 +18,13 @@ http://localhost:8080/h2-console/
 username: bci_usuarioAdmin
 password: bci_usuarioAdmin2023
 
-Como probar: 
+**Como probar: **
 
-1 Descarga el repositorio. 
-2 Abre el proyecto con algun IDE como Eclipse o InteliJ.
-3 Ejecuta el proyecto como  spring boot aplication (Run ass -> Spring boot app )
-4 Inicia postman e importa postman.collection incluida en este repositorio
-5 Ejecuta las consultas de la coleccion teniendo las siguientes precauciones: 
+1 Descarga el repositorio.<br>		
+2 Abre el proyecto con algun IDE como Eclipse o InteliJ.<br>
+3 Ejecuta el proyecto como  spring boot aplication (Run ass -> Spring boot app )<br>
+4 Inicia postman e importa postman.collection incluida en este repositorio<br>
+5 Ejecuta las consultas de la coleccion teniendo las siguientes precauciones: <br>
 
 Crear usuario: 
 	Permite crear un usuario con 0 o mas numeros de telefonos, los cuales se guardaran asociados a el. 
@@ -55,7 +55,7 @@ Consultar por los telefonos de un usuario:
 
 
 
-Para test unitarios: 
+**Para test unitarios: **
 
 Ejecuta el proyecto como JUnit test (Run ass -> JUnit test).
 
@@ -69,7 +69,7 @@ Ejecuta el proyecto como JUnit test (Run ass -> JUnit test).
 
 
 ************************************   
-Proximas mejoras: 
+** Proximas mejoras: **
 
 Aumentar coverage a un 90%.
 
